@@ -9,6 +9,7 @@ import axios from "axios";
 export interface User {
   // Add user properties here
   username: string;
+  email:string;
   // other properties...
 }
 
@@ -61,8 +62,12 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       console.log("API Response:", response.data);
   
       if (response.status === 200) {
-        const userData: User = { username }; // Customize user data if needed
+        const userData: User = {
+          username,
+          email: ""
+        }; // Customize user data if needed
         setUser(userData);
+      
         localStorage.setItem("user", JSON.stringify(userData));
         router.push("/");
   
@@ -81,6 +86,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       }
     }
   };
+  console.log(user)
 
   const logout = () => {
     setUser(null);

@@ -44,7 +44,7 @@ export default function Login() {
     <div className="flex h-screen">
       {/* Left Side - Illustration */}
       <div className="hidden md:block w-1/3 bg-gradient-to-b from-purple-200 to-orange-100 relative">
-        <div className="p-6 absolute top-0 left-0">
+        <div className="p-6 absolute bg-white top-0 left-0">
           <div className="text-white text-2xl font-bold">Job Markets</div>
         </div>
         
