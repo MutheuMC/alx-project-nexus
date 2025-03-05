@@ -18,12 +18,19 @@ const PostJob: React.FC = () => {
     jobDescription: '',
     jobLocation: '',
     experience_level: '',
+    created_by :''
   });
+  useEffect(() => {
+    const userId = localStorage.getItem('user_id'); // Retrieve user ID from localStorage
+    console.log(userId)
+    if (userId) {
+      setFormData(prev => ({ ...prev, created_by: userId })); // Update state
+    }} , [])
 
     // Call auth middleware to protect this page
-    useEffect(() => {
-      authMiddleware(); // Redirects to login if not authenticated
-    }, []);
+    // useEffect(() => {
+      // authMiddleware(); // Redirects to login if not authenticated
+    // }, []);
   
 
   // Load categories
