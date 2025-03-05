@@ -2,17 +2,17 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { useRouter } from "next/navigation";
-import {CSRF_TOKEN} from '@/config'
 import axios from "axios";
+import {jwtDecode} from "jwt-decode"; // Import jwt-decode
 
-// Define your interfaces
+// Define user type
 export interface User {
-  // Add user properties here
+  user_id: string;
   username: string;
-  email:string;
-  // other properties...
+  email: string;
 }
 
+// Define AuthContextType
 export interface AuthContextType {
   user: User | null;
   login: (username: string, password: string) => Promise<{ success: boolean; error?: string }>;
@@ -20,7 +20,7 @@ export interface AuthContextType {
   isAuthenticated: boolean;
 }
 
-// Create the context with an initial undefined value
+// Create Context
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 interface AuthProviderProps {
@@ -28,11 +28,9 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  // Initialize with null, then load from localStorage in useEffect
   const [user, setUser] = useState<User | null>(null);
   const router = useRouter();
-  
-  // Use useEffect to load from localStorage after component mounts (client-side only)
+
   useEffect(() => {
     try {
       const storedUser = localStorage.getItem("user");
@@ -46,11 +44,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const login = async (username: string, password: string) => {
     try {
-      console.log("Login Request:", { username, password });
-  
       const response = await axios.post(
         `https://michaelmwanza.site/api/auth/login/`,
-        { username, password }, // Data to send
+        { username, password },
         {
           headers: {
             Accept: "application/json",
@@ -58,35 +54,32 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           },
         }
       );
-  
-      console.log("API Response:", response.data);
-  
+
       if (response.status === 200) {
+        const { access } = response.data;
+
+        // Decode JWT to extract user_id
+        const decodedToken: any = jwtDecode(access);
+        console.log("Decoded Token:", decodedToken);
+
         const userData: User = {
+          user_id: decodedToken.user_id,
           username,
-          email: ""
-        }; // Customize user data if needed
+          email: decodedToken.email || "",
+        };
+
         setUser(userData);
-      
         localStorage.setItem("user", JSON.stringify(userData));
         router.push("/");
-  
+
         return { success: true };
       } else {
-        console.error("Login failed:", response.data.message);
         return { success: false, error: response.data.message || "Invalid credentials" };
       }
     } catch (error: any) {
-      if (error.response) {
-        console.error("API Error:", error.response.data);
-        return { success: false, error: error.response.data.message || "Invalid credentials" };
-      } else {
-        console.error("Login error:", error.message);
-        return { success: false, error: "Network Error or Server is down" };
-      }
+      return { success: false, error: error.response?.data?.message || "Network Error or Server is down" };
     }
   };
-  console.log(user)
 
   const logout = () => {
     setUser(null);
@@ -103,7 +96,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   );
 };
 
-// Export the useAuth hook correctly
 export const useAuth = (): AuthContextType => {
   const context = useContext(AuthContext);
   if (!context) {
@@ -112,5 +104,4 @@ export const useAuth = (): AuthContextType => {
   return context;
 };
 
-// Export the AuthProvider as default
 export default AuthProvider;

@@ -38,6 +38,7 @@ export default function Signup() {
       return;
     }
     console.log({ username, email, password });
+    const frontendUrl = "http://localhost:3000/auth"
     try {
       const res = await fetch("https://michaelmwanza.site/api/auth/register/", {
         method: "POST",
@@ -46,7 +47,7 @@ export default function Signup() {
           // "X-CSRFTOKEN": "UfCbGZFVZWpt34DHVlHIbrmJ6iv2tJFDha9puReljkJA6IcOp5wTnkDyigCFkp0g",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username, email, password }),
+        body: JSON.stringify({ username, email, password , frontendUrl}),
       });
       const data = await res.json();
       if (res.ok) {
