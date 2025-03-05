@@ -3,7 +3,7 @@ import { useCategories } from '@/hooks/useCategories'
 
 const Filter = () => {
   const { categories, loading, error } = useCategories()
-  const [selectedCategories, setSelectedCategories] = useState([])
+  const [selectedCategories, setSelectedCategories] = useState<(number | string)[]>([])
   const [location, setLocation] = useState('')
   const [isRemote, setIsRemote] = useState(false)
   const [isFullTime, setIsFullTime] = useState(false)
@@ -11,7 +11,7 @@ const Filter = () => {
 
   console.log(categories)
 
-  const handleCategoryChange = (categoryId) => {
+  const handleCategoryChange = (categoryId: number | string) => {
     if (selectedCategories.includes(categoryId)) {
       setSelectedCategories(selectedCategories.filter(id => id !== categoryId))
     } else {
