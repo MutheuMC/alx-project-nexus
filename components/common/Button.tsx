@@ -2,9 +2,9 @@ import React from "react";
 import { ButtonProps, ButtonVariant } from "@/interfaces";
 
 const variantStyles: Record<ButtonVariant, string> = {
-  primary: "bg-blue-600 hover:bg-blue-700 text-white",
+  primary: "bg-gray-600 hover:bg-gray-700 text-white",
   outline: "border border-blue-600 text-blue-600 hover:bg-blue-100",
-  danger: "bg-red-600 hover:bg-red-700 text-white",
+  danger: "bg-black hover:bg-gray-700 text-white ",
 };
 
 const Button: React.FC<ButtonProps> = ({ name, icon, onClick, variant = "primary" }) => {
