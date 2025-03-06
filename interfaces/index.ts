@@ -7,16 +7,27 @@ export interface ButtonProps {
   variant?: ButtonVariant; // Optional variant prop
 }
 
-export interface JobCardProps {
-    company: string;
-    title: string;
-    location: string;
-    postedTime: string;
-    isRemote: boolean;
-    isFeatured: boolean;
-  }
+export interface Job {
+  id: number;
+  company_name: string;
+  title: string;
+  location: string;
+  posted_at: string;
+  experience_level: string;
+  description: string;
+}
 
   export interface CardProps {
     children: React.ReactNode;
     className?: string;
   }
+
+
+export interface ApiResponse {
+  results: Job[];
+}
+export interface BadgeProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
