@@ -51,7 +51,7 @@ export default function Signup() {
       const data = await res.json();
       if (res.ok) {
         toast.success("Signup successful!");
-        router.push("/login");
+        router.push("/auth/login");
       } else {
         Object.keys(data).forEach((key) => {
           if (Array.isArray(data[key])) {

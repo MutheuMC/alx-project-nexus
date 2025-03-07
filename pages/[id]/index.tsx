@@ -1,6 +1,6 @@
 import React, {useEffect , useState} from 'react'
 import { useRouter } from 'next/router'
-import { useJob } from '@/hooks/UseJob';
+import { useJob } from '@/hooks/useJob';
 import { useParams } from 'next/navigation';
 import { JobInfo } from '@/components/JobInfo';
 import Link from 'next/link';
