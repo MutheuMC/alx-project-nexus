@@ -24,7 +24,7 @@ const index = () => {
           Job Market is the heart of all jobs. One stop shop to finding anything you want and require even when you don't know
         </span>
         <div className="flex justify-center p-5">
-          <Link href={`/jobPost`}>
+          <Link href={`/jobs/post`}>
           <Button name="Post a Job" icon={<Plus />} onClick={handleClick} variant="danger"  />
           </Link>
         </div>

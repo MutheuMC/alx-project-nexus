@@ -72,7 +72,7 @@ const JobCard: React.FC<Job> = ({ company_name,id,  title, location, posted_at, 
           <Link href={`/${id}`}>
           <Button variant="outline" >View job</Button>
           </Link>
-          <Link href={``}>
+          <Link href={`/jobs/apply`}>
           <Button variant="outline">Apply now</Button>
           
           </Link>

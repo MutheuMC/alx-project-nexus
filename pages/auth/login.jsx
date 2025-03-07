@@ -76,13 +76,13 @@ export default function Login() {
 
         <p className={styles.textCenter}>
           Forgot password?{" "}
-          <Link href="/forgotPassword" className={styles.link}>
+          <Link href="/auth/forgotPassword" className={styles.link}>
             Reset here
           </Link>
         </p>
         <p className={styles.textCenter}>
           Don't have an account?{" "}
-          <Link href="/signup" className={styles.link}>
+          <Link href="/auth/signup" className={styles.link}>
             Sign up
           </Link>
         </p>

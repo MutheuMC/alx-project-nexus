@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const logout = () => {
     setUser(null);
     localStorage.removeItem("user");
-    router.push("/login");
+    router.push("/auth/login");
   };
 
   const isAuthenticated = !!user;
