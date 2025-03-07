@@ -1,8 +1,9 @@
 // pages/post-job.tsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { FaBold, FaItalic, FaListUl, FaListOl } from 'react-icons/fa';
 import { useCategories } from '@/hooks/useCategories';
+import { authMiddleware } from '@/middleware/authMiddleware';
 
 type ExperienceOption = {
   value: string;
@@ -18,6 +19,12 @@ const PostJob: React.FC = () => {
     jobLocation: '',
     experience_level: '',
   });
+
+
+  // Call auth middleware to protect this page
+  useEffect(() => {
+    authMiddleware(); // Redirects to login if not authenticated
+  }, []);
 
   // Load categories
   const { categories, loading, error } = useCategories();
