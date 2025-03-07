@@ -10,9 +10,10 @@ const Header = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="w-full fixed bg-white z-50 shadow-sm">
+    <header className="w-full fixed bg-white z-50 position-sticky">
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-        {/* Logo */}
+        <div className='flex gap-4 items-center'>
+          {/* Logo */}
         <Link href="/" className="text-2xl font-bold">
           Job Markets
         </Link>
@@ -21,6 +22,8 @@ const Header = () => {
         <div className="hidden lg:block">
           <SearchBar />
         </div>
+        </div>
+    
 
         {/* Navbar */}
         <div className="hidden lg:flex gap-6 items-center">

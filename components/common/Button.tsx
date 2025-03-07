@@ -5,6 +5,8 @@ const variantStyles: Record<ButtonVariant, string> = {
   primary: "bg-gray-600 hover:bg-gray-700 text-white",
   outline: "border border-blue-600 text-blue-600 hover:bg-blue-100",
   danger: "bg-black hover:bg-gray-700 text-white ",
+  gray : "bg-gray-100 rounded-lg"
+  
 };
 
 const Button: React.FC<ButtonProps> = ({ name, icon, onClick, variant = "primary" }) => {

@@ -1,4 +1,4 @@
-export type ButtonVariant = "primary" | "outline" | "danger";
+export type ButtonVariant = "primary" | "outline" | "danger" | "gray";
 
 export interface ButtonProps {
   name: string;
@@ -31,3 +31,20 @@ export interface BadgeProps {
   className?: string;
 }
 
+export interface category{
+  id: number;
+  name:string;
+}
+export interface User {
+  id: string;
+  username: string;
+  email: string;
+  token: string;
+}
+
+export interface AuthContextType {
+  user: User | null;
+  login: (userData: User) => void;
+  logout: () => void;
+  isAuthenticated: boolean;
+}

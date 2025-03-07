@@ -12,9 +12,9 @@ interface ButtonProps {
 }
 
 const Button: React.FC<ButtonProps> = ({ children, variant = 'default', onClick }) => {
-  const baseStyles = 'px-4 py-2 rounded font-medium focus:outline-none focus:ring';
+  const baseStyles = 'px-4 py-2 rounded-full font-medium  text-black text-sm focus:outline-none focus:ring';
   const variants = {
-    outline: 'border border-blue-500 text-blue-500 hover:bg-blue-100',
+    outline: 'border border-gray-500 text-black hover:cursor-pointer',
     default: 'bg-blue-500 text-white hover:bg-blue-600',
   };
 
@@ -72,8 +72,11 @@ const JobCard: React.FC<Job> = ({ company_name,id,  title, location, posted_at, 
           <Link href={`/${id}`}>
           <Button variant="outline" >View job</Button>
           </Link>
+          <Link href={``}>
+          <Button variant="outline">Apply now</Button>
+          
+          </Link>
          
-          <Button>Apply now</Button>
         </div>
       </div>
     </div>
