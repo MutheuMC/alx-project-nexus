@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useState} from 'react';
 import Button from '@/components/common/Button';
 import Filter from '@/components/Filter';
 import Search1 from '@/components/Search1';
@@ -7,9 +7,14 @@ import JobList from '@/components/JobList';
 import Link from 'next/link';
 
 const index = () => {
+
+  const [filters, setFilters] = useState<Record<string, string>>({});
+
   const handleClick = () => {
     console.log('You have been clicked');
   };
+
+
 
   return (
     <div className="bg-white min-h-screen">
@@ -38,7 +43,7 @@ const index = () => {
 
       {/* Search Bar */}
       <div className="ml-12 max-w-3xl ">
-        <Search1  />
+      <Search1 placeholder="Search jobs..." />
       </div>
 
       {/* Job List and Filters Layout */}

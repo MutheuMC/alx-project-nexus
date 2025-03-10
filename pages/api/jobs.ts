@@ -1,12 +1,12 @@
-// src/api/jobs.ts
 import { getApiUrl, CSRF_TOKEN } from '@/config';
-
 import { ApiResponse } from '@/interfaces';
 
-
-export async function fetchJobs(): Promise<ApiResponse> {
+export async function fetchJobs(query: Record<string, string> = {}): Promise<ApiResponse> {
   try {
-    const response = await fetch(getApiUrl('jobs'), {
+    const params = new URLSearchParams(query).toString();
+    const url = getApiUrl(`jobs/?${params}`);
+
+    const response = await fetch(url, {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
