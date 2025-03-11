@@ -6,6 +6,11 @@ export function useJob(id: string | number) {
   const [job, setJob] = useState<Job | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [count, setCount] = useState<number>(0);
+    const [nextPage, setNextPage] = useState<string | null>(null);
+    const [prevPage, setPrevPage] = useState<string | null>(null);
+    const [totalPages, setTotalPages] = useState<number>(1);
+    const [page, setPage] = useState<number>(1);
 
   useEffect(() => {
     async function getJob() {

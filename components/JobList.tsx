@@ -1,14 +1,16 @@
-import React from 'react';
+"use client";
+
+import React,  { useState } from 'react';
 import JobCard from '@/components/JobCard';
 import { useJobs } from '@/hooks/useJobs';
 
 
-interface JobListProps {
-  filter: Record<string, string | string[]>;
-}
 
-const JobList: React.FC<JobListProps>  = () => {
-  const { jobs, loading, error } = useJobs();
+
+const JobList: React.FC  = () => {
+
+  const { jobs, loading, error, totalPages, page, setPage } = useJobs();
+  
 
   if (loading) return <p>Loading jobs...</p>;
   if (error) return <p>{error}</p>;
@@ -31,8 +33,40 @@ const JobList: React.FC<JobListProps>  = () => {
       ) : (
         <p>No jobs available</p>
       )}
+       {/* ✅ Pagination Buttons */}
+       <div className="flex justify-center mt-4 space-x-2">
+  <button
+    disabled={page === 1}
+    onClick={() => setPage(page - 1)}
+    className={`px-4 py-2 rounded bg-gray-600 text-white transition-all ${
+      page === 1
+        ? "opacity-50 cursor-not-allowed"
+        : "hover:bg-purple-500 hover:text-white"
+    }`}
+  >
+    ← 
+  </button>
+
+  {/* <span className="px-4 py-2 bg-gray-700 text-white rounded">{`Page ${page} of ${totalPages}`}</span> */}
+
+  <button
+    disabled={page >= totalPages}
+    onClick={() => setPage(page + 1)}
+    className={`px-4 py-2 rounded bg-gray-600 text-white transition-all ${
+      page >= totalPages
+        ? "opacity-50 cursor-not-allowed"
+        : "hover:bg-purple-500 hover:text-white"
+    }`}
+  >
+   →
+  </button>
+</div>
+
     </div>
   );
 };
 
 export default JobList;
+
+
+
