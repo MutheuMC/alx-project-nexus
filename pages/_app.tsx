@@ -1,5 +1,5 @@
 import "@/styles/globals.css";
-import { useEffect } from 'react';
+import Footer from "@/components/Footer";
 import type { AppProps } from "next/app";
 import Header from "@/components/Header";
 import AuthProvider from "@/context/AuthContext";
@@ -17,6 +17,8 @@ export default function App({ Component, pageProps }: AppProps) {
       <main className={shouldShowHeader ? "pt-20" : ""}>
         <Component {...pageProps} />
       </main>
+        <Footer/>
+
     </AuthProvider>
   );
 }

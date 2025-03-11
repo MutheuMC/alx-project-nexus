@@ -14,7 +14,7 @@ const JobList: React.FC<JobListProps>  = () => {
   if (error) return <p>{error}</p>;
 
   return (
-    <div className="grid gap-4">
+    <div className="grid gap-4 w-full ml-0">
       {jobs.length > 0 ? (
         jobs.map((job, index) => (
           <JobCard

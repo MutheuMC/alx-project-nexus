@@ -7,8 +7,8 @@ import JobList from "@/components/JobList";
 import Link from "next/link";
 
 interface User {
-  user_id: string; 
-  name?: string;  
+  user_id: string;
+  name?: string;
 }
 const Index = () => {
   const [filters, setFilters] = useState<Record<string, string | string[]>>({});
@@ -42,7 +42,7 @@ const Index = () => {
 
   return (
     <div className="bg-white min-h-screen">
-      <div className="max-w-4xl mx-auto pt-12 pb-20 px-4">
+      <div className="max-w-6xl mx-auto pt-12 pb-20 px-4">
         <div className="text-center py-20 bg-white">
           <p className="text-3xl md:text-5xl font-extrabold text-gray-900">The #1 job board for all jobs</p>
           <span className="text-sm md:text-lg text-gray-600 mt-2 block">
@@ -56,7 +56,14 @@ const Index = () => {
         </div>
 
         <div className="ml-12 flex rounded-lg gap-6 py-5">
-          <Button name="Job Board" onClick={() => handleTabChange("jobBoard")} variant={activeTab === "jobBoard" ? "gray" : "danger"} />
+         <div className="text-black">
+          <Button
+              name="Job Board"
+              onClick={() => handleTabChange("jobBoard")}
+              variant={activeTab === "jobBoard" ? "gray" : "danger"}
+
+          />
+         </div>
           {isLoggedIn && (
             <>
               <Button name="Posted Jobs" onClick={() => handleTabChange("postedJobs")} variant={activeTab === "postedJobs" ? "gray" : "danger"} />
@@ -66,15 +73,15 @@ const Index = () => {
         </div>
 
                 {/* Search Bar - Show on all tabs */}
-      <div className="ml-12 max-w-3xl">
+      <div className="ml-12 max-w-3xl pb-4">
         <Search1 placeholder="Search jobs..." />
       </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 p-10">
-          <div className="col-span-2">
+        <div className="flex flex-col md:flex-row gap-6 px-4 md:px-10">
+          <div className="flex-1">
             <JobList filter={filters} />
           </div>
-          <div className="col-span-1">
+          <div className="hidden md:block w-full md:w-[300px] md:shrink-0">
             <Filter userId={user?.user_id} activeTab={activeTab} onFilterChange={setFilters} />
           </div>
         </div>

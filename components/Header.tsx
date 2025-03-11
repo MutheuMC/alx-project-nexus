@@ -56,7 +56,7 @@ const Header = () => {
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
         {/* Left Section: Logo & Search */}
         <div className="flex gap-4 items-center">
-          <Link href="/" className="text-2xl font-bold">
+          <Link href="/" className="text-2xl font-bold text-black">
             Job Markets
           </Link>
 
@@ -94,14 +94,17 @@ const Header = () => {
             </div>
           ) : (
             <div className="flex items-center gap-4">
-              <Link href="/auth/signup" className="text-sm">
-                Sign up
+              <Link href="/signup">
+                <div className=" px-4 py-3  text-center font-medium text-black hover:bg-gray-200 hover:rounded-full transition-all duration-300">
+                  Sign up
+                </div>
               </Link>
               <Link href="/auth/login" className="bg-black text-white px-4 py-2 rounded-full">
                 Log in
               </Link>
             </div>
           )}
+
         </div>
 
         {/* Fixed Mobile Menu Button */}
@@ -135,8 +138,10 @@ const Header = () => {
               <Link href="/login" className="bg-black text-white px-4 py-3 rounded-lg text-center font-medium">
                 Log in
               </Link>
-              <Link href="/signup" className="border border-gray-300 px-4 py-3 rounded-lg text-center font-medium">
-                Sign up
+              <Link href="/signup">
+                <div className="border border-gray-300 px-4 py-3 rounded-lg text-center font-medium text-black hover:bg-gray-200">
+                  Sign up
+                </div>
               </Link>
             </div>
           )}
