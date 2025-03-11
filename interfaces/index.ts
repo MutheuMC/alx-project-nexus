@@ -9,7 +9,7 @@ export interface ButtonProps {
 
 export interface Job {
   id: number;
-  company_name: string;
+  company_name?: string;
   title: string;
   location: string;
   posted_at: string;

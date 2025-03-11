@@ -30,7 +30,7 @@ const ProfileCard = () => {
     params.set("created_by", user.user_id);
     console.log("You have been clicked");
 
-    router.replace(`https://michaelmwanza.site/api/jobs?${params.toString()}`);
+    router.push(`/?${params.toString()}`);
   };
       const handleClick = () => {
         console.log('You have been clicked');

@@ -196,6 +196,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     localStorage.removeItem("token");
     localStorage.removeItem("refreshToken");
     router.push("/");
+
+      // Reload the page after a short delay to ensure navigation happens first
+  setTimeout(() => {
+    window.location.reload();
+  }, 100);
   };
 
   const isAuthenticated = !!user;

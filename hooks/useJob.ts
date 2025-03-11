@@ -1,20 +1,31 @@
-// src/hooks/useJobs.ts
 import { useEffect, useState } from 'react';
-import { fetchJob } from '@/pages/api/job';
+import { getApiUrl, CSRF_TOKEN } from '@/config';
+import { Job } from '@/interfaces';
 
 export function useJob(id: string | number) {
-  const [job, setJob] = useState<any[]>([]);
+  const [job, setJob] = useState<Job | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function getJob() {
       try {
-        const data = await fetchJob(id);
-        // console.log(data);
-        setJob(data);
+        const response = await fetch(getApiUrl(`jobs/${id}`), {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+            'X-CSRFTOKEN': CSRF_TOKEN,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`Failed to fetch job: ${response.status}`);
+        }
+
+        const data = await response.json();
+        setJob(data); // Ensure we return a single job, not an array
       } catch (err) {
-        setError('Failed to fetch jobs');
+        setError('Failed to fetch job');
       } finally {
         setLoading(false);
       }

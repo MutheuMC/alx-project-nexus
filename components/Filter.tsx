@@ -1,11 +1,17 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useCategories } from "@/hooks/useCategories";
 import { useJobs } from "@/hooks/useJobs";
 
+// Define the prop types
+interface FilterProps {
+  userId?: string;
+  activeTab: string;
+  onFilterChange: (filters: Record<string, string | string[]>) => void;
+}
 
-const Filter = () => {
+const Filter: React.FC<FilterProps>= ({ userId, activeTab, onFilterChange }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { categories } = useCategories();
@@ -17,12 +23,17 @@ const Filter = () => {
   const [isMid, setIsMid] = useState(false);
   const [isEntry, setIsEntry] = useState(false);
 
+  useEffect(() => {
+    updateFilters();
+  }, [selectedCategories, location, isSenior, isMid, isEntry, activeTab]);
+
   const updateFilters = () => {
     const params = new URLSearchParams(searchParams.toString());
 
     params.delete("category");
     params.delete("location");
     params.delete("experience_level");
+    params.delete("created_by");
 
     if (selectedCategories.length > 0) params.set("category", selectedCategories.join(","));
     if (location) params.set("location", location);
@@ -30,24 +41,30 @@ const Filter = () => {
     if (isMid) params.append("experience_level", "mid");
     if (isEntry) params.append("experience_level", "entry");
 
+    // If in "Posted Jobs" tab, filter by `created_by`
+    if (activeTab === "postedJobs" && userId) {
+      params.set("created_by", userId);
+    }
+
     router.push(`?${params.toString()}`);
+    onFilterChange(Object.fromEntries(params.entries())); // Pass updated filters
   };
 
-   // Function to clear filters
-   const clearFilters = () => {
+  const clearFilters = () => {
     setSelectedCategories([]);
-    setLocation('');
+    setLocation("");
     setIsEntry(false);
     setIsMid(false);
     setIsSenior(false);
-    router.push('/'); // Navigates to the job listing page without filters
+    router.push("/");
+    onFilterChange({});
   };
 
   return (
     <div className="bg-white p-6 rounded-lg border border-gray-200 w-[350px]">
       {/* Categories */}
       <div>
-        <h2 className="font text-base mb-3">Categories</h2>
+        <h2 className="text-base mb-3">Categories</h2>
         <div className="flex flex-col gap-2">
           {categories.map((category) => (
             <label key={category.id} className="flex items-center text-sm text-gray-700 gap-2">
@@ -55,11 +72,11 @@ const Filter = () => {
                 type="checkbox"
                 className="accent-purple-600"
                 checked={selectedCategories.includes(category.name)}
-                onChange={() => {
+                onChange={() =>
                   setSelectedCategories((prev) =>
                     prev.includes(category.name) ? prev.filter((c) => c !== category.name) : [...prev, category.name]
-                  );
-                }}
+                  )
+                }
               />
               {category.name}
             </label>

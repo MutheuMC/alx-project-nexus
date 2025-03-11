@@ -12,19 +12,19 @@ const Header = () => {
   const [profileOpen, setProfileOpen] = useState(false);
   const { user, logout, fetchWithAuth } = useAuth();
 
-  useEffect(() => {
-    const checkAuth = async () => {
-      if (user) { // Only make the API request if the user is logged in
-        try {
-          await fetchWithAuth("https://michaelmwanza.site/api/auth/profile/");
-        } catch (error) {
-          console.error("Error fetching profile:", error);
-        }
-      }
-    };
+  // useEffect(() => {
+  //   const checkAuth = async () => {
+  //     if (user) { // Only make the API request if the user is logged in
+  //       try {
+  //         await fetchWithAuth("https://michaelmwanza.site/api/auth/profile/");
+  //       } catch (error) {
+  //         console.error("Error fetching profile:", error);
+  //       }
+  //     }
+  //   };
 
-    checkAuth();
-  }, [user, fetchWithAuth]); // Re-run if `user` changes
+  //   checkAuth();
+  // }, [user, fetchWithAuth]); // Re-run if `user` changes
 
   // Close mobile menu when clicking outside
   useEffect(() => {
@@ -46,7 +46,7 @@ const Header = () => {
     }
   }, [open]);
 
-  const toggleMenu = (e:  React.MouseEvent<HTMLDivElement>) => {
+  const toggleMenu = (e: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
     e.stopPropagation(); // Prevent event from bubbling up
     setOpen(!open);
   };
@@ -94,10 +94,10 @@ const Header = () => {
             </div>
           ) : (
             <div className="flex items-center gap-4">
-              <Link href="/signup" className="text-sm">
+              <Link href="/auth/signup" className="text-sm">
                 Sign up
               </Link>
-              <Link href="/login" className="bg-black text-white px-4 py-2 rounded-full">
+              <Link href="/auth/login" className="bg-black text-white px-4 py-2 rounded-full">
                 Log in
               </Link>
             </div>
