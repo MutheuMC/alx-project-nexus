@@ -21,7 +21,7 @@ const ProfileCard = () => {
     <div className="flex flex-col items-center p-6 bg-white  rounded-2xl ">
         <div className="flex gap-10  justify-center">
         <div className="w-20 h-20 flex items-center justify-center bg-purple-500 text-white text-2xl font-bold rounded-full">
-        M
+        {user?.username?.charAt(0).toUpperCase() || "?"}
       </div>
       <div>
       <h2 className="mt-3 text-3xl font-semibold">{user?.username}</h2>

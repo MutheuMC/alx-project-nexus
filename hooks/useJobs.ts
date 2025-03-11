@@ -10,6 +10,9 @@ interface Job {
 }
 
 interface JobsResponse {
+  count: number; 
+  next: string | null;
+  previous: string | null;
   results: Job[];
 }
 
@@ -18,6 +21,11 @@ export function useJobs() {
   const [locations, setLocations] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [count, setCount] = useState<number>(0);
+  const [nextPage, setNextPage] = useState<string | null>(null);
+  const [prevPage, setPrevPage] = useState<string | null>(null);
+  const [totalPages, setTotalPages] = useState<number>(1);
+  const [page, setPage] = useState<number>(1); 
   const searchParams = useSearchParams();
 
   useEffect(() => {
@@ -27,7 +35,7 @@ export function useJobs() {
 
       try {
         const params = searchParams.toString();
-        const url = getApiUrl(`jobs/?${params}`);
+        const url = getApiUrl(`jobs/?page=${page}&${params}`);
 
         const response = await fetch(url, {
           method: "GET",
@@ -42,8 +50,13 @@ export function useJobs() {
         }
 
         const data: JobsResponse = await response.json();
-        setJobs(data.results);
+        console.log(data);
 
+        setJobs(data.results);
+        setCount(data.count);
+        setNextPage(data.next);
+        setPrevPage(data.previous);
+        setTotalPages(Math.ceil(data.count / 10));
         const uniqueLocations = Array.from(new Set(data.results.map((job) => job.location)));
         setLocations(uniqueLocations);
       } catch (err) {
@@ -54,7 +67,7 @@ export function useJobs() {
     }
 
     getJobs();
-  }, [searchParams]);
+  }, [searchParams, page]);
 
-  return { jobs, locations, loading, error };
+  return { jobs, locations, totalPages, setPage, page, loading, error };
 }

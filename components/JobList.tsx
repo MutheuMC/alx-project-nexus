@@ -1,14 +1,16 @@
-import React from 'react';
-import JobCard from '@/components/JobCard';
-import { useJobs } from '@/hooks/useJobs';
+"use client";
 
+import React from "react";
+import JobCard from "@/components/JobCard";
+import { useJobs } from "@/hooks/useJobs";
+import Pagination from "@/components/Pagination"; 
 
 interface JobListProps {
-  filter: Record<string, string | string[]>;
+  filter: Record<string, string | string[]>; // Define filter prop type
 }
 
-const JobList: React.FC<JobListProps>  = () => {
-  const { jobs, loading, error } = useJobs();
+const JobList: React.FC<JobListProps>= () => {
+  const { jobs, loading, error, totalPages, page, setPage } = useJobs();
 
   if (loading) return <p>Loading jobs...</p>;
   if (error) return <p>{error}</p>;
@@ -31,6 +33,9 @@ const JobList: React.FC<JobListProps>  = () => {
       ) : (
         <p>No jobs available</p>
       )}
+
+      {/* ✅ Pagination Component */}
+      <Pagination page={page} totalPages={totalPages} setPage={setPage} />
     </div>
   );
 };

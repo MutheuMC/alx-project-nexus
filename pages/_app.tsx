@@ -4,6 +4,7 @@ import type { AppProps } from "next/app";
 import Header from "@/components/Header";
 import AuthProvider from "@/context/AuthContext";
 import { useRouter } from "next/router";
+import Footer from "@/components/Footer";
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -17,6 +18,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <main className={shouldShowHeader ? "pt-20" : ""}>
         <Component {...pageProps} />
       </main>
+      <Footer/>
     </AuthProvider>
   );
 }
