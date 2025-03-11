@@ -13,6 +13,8 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
+
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
   
   // Get the auth context
   const context = useContext(AuthContext);
@@ -26,14 +28,24 @@ export default function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setIsLoggingIn(true);
     setError("");
-
-    const result = await login(username, password);
-    console.log(result);
-    if (!result.success && result.error) {
-      setError(result.error);
+  
+    try {
+      const result = await login(username, password);
+      console.log(result);
+  
+      if (!result.success && result.error) {
+        setError(result.error);
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      setError("An unexpected error occurred. Please try again.");
+    } finally {
+      setIsLoggingIn(false); 
     }
   };
+  
 
   const handleGoogleLogin = () => {
     // Implement Google login logic here
@@ -116,12 +128,16 @@ export default function Login() {
               </button>
             </div>
 
-            <button 
-              type="submit" 
-              className="w-full py-3 px-4 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-colors"
+            <button
+              type="submit"
+              disabled={isLoggingIn}
+              className={`w-full py-3 px-4 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-colors ${
+                isLoggingIn ? "opacity-50 cursor-not-allowed" : ""
+              }`}
             >
-              Sign In
+              {isLoggingIn ? "Signing In..." : "Sign In"}
             </button>
+
           </form>
           
           <div className="mt-6 text-sm text-center text-gray-600">

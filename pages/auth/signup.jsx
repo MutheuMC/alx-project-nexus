@@ -17,6 +17,8 @@ export default function Signup() {
   const [passwordsMatch, setPasswordsMatch] = useState(false);
   const router = useRouter();
 
+  const [isSigningUp, setIsSigningUp] = useState(false);
+
   useEffect(() => {
     setPasswordsMatch(password.trim() === confirmPassword.trim());
   }, [password, confirmPassword]);
@@ -33,6 +35,7 @@ export default function Signup() {
 
   const handleSignup = async (e) => {
     e.preventDefault();
+    setIsSigningUp(true);
     if (!allValid) {
       toast.error("Password does not meet all requirements!");
       return;
@@ -61,6 +64,8 @@ export default function Signup() {
       }
     } catch (err) {
       toast.error("Something went wrong!");
+    }finally {
+      setIsSigningUp(false);
     }
   };
 
@@ -144,14 +149,15 @@ export default function Signup() {
               <li className={passwordValidations.specialChar ? "text-green-600" : "text-red-600"}>At least 1 special character (@#$%^&*)</li>
             </ul>
             <button
-                disabled={!allValid || !passwordsMatch}
-                className={`w-full py-3 px-4 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-colors ${
-                  !allValid || !passwordsMatch ? "opacity-50 cursor-not-allowed" : ""
-                }`}
-                type="submit"
->
-              Sign Up
+              disabled={!allValid || !passwordsMatch || isSigningUp}
+              className={`w-full py-3 px-4 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-colors ${
+                !allValid || !passwordsMatch || isSigningUp ? "opacity-50 cursor-not-allowed" : ""
+              }`}
+              type="submit"
+            >
+              {isSigningUp ? "Signing Up..." : "Sign Up"}
             </button>
+
           </form>
           <div className="mt-6 text-center">
             <span className="text-gray-600">Already have an account?</span>{" "}
