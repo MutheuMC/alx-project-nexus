@@ -38,13 +38,12 @@ export default function Signup() {
       return;
     }
     console.log({ username, email, password });
-    const frontendUrl = "http://localhost:3000/auth"
+    const frontendUrl = "https://alx-project-nexus-pi.vercel.app"
     try {
       const res = await fetch("https://michaelmwanza.site/api/auth/register/", {
         method: "POST",
         headers: {
-          // "accept":" application/json",
-          // "X-CSRFTOKEN": "UfCbGZFVZWpt34DHVlHIbrmJ6iv2tJFDha9puReljkJA6IcOp5wTnkDyigCFkp0g",
+          
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ username, email, password , frontendUrl}),
@@ -52,7 +51,7 @@ export default function Signup() {
       const data = await res.json();
       if (res.ok) {
         toast.success("Signup successful! Please check your email to activate your account.");
-        router.push("/");
+        router.push("/auth/login");
       } else {
         Object.keys(data).forEach((key) => {
           if (Array.isArray(data[key])) {
@@ -67,7 +66,17 @@ export default function Signup() {
 
   return (
     <div className="flex h-screen">
-      <div className="hidden md:block w-1/3 bg-gradient-to-b from-purple-200 to-orange-100"></div>
+           <div className="hidden md:block w-1/3 bg-gradient-to-b from-purple-200 to-orange-100 relative">
+  
+        <div className="text-gray-900 p-6 text-2xl font-bold">
+          <Link href={`/`}>
+          Job Markets
+          </Link>
+        </div>
+      
+      
+
+    </div>
       <div className="w-full md:w-2/3 flex items-center bg-white justify-center px-4">
         <div className="w-full max-w-md p-6">
           <h1 className="text-3xl font-bold mb-8 text-center">Sign Up</h1>

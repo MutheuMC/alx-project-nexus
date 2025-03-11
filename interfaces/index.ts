@@ -15,6 +15,7 @@ export interface Job {
   posted_at: string;
   experience_level: string;
   description: string;
+  created_by?: string
 }
 
   export interface CardProps {

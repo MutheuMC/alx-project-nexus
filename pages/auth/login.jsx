@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { AuthContext } from "@/context/AuthContext";
 import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
 import Link from "next/link";
-import Image from "next/image";
+
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -44,30 +44,15 @@ export default function Login() {
     <div className="flex h-screen">
       {/* Left Side - Illustration */}
       <div className="hidden md:block w-1/3 bg-gradient-to-b from-purple-200 to-orange-100 relative">
-        <div className="p-6 absolute bg-white top-0 left-0">
-          <div className="text-white text-2xl font-bold">Job Markets</div>
-        </div>
-        
-        <div className="absolute bottom-4 left-4 text-sm text-white opacity-70">
-          @nguyenhut
-        </div>
-        
-        {/* You would need to add your own 3D figure here */}
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-          <div className="w-64 h-64 bg-teal-300 rounded-full flex items-center justify-center">
-            {/* This is a placeholder for your 3D character */}
-            <div className="w-32 h-16 bg-black relative overflow-hidden rounded-lg border-4 border-purple-500">
-              <div className="absolute top-0 left-0 w-8 h-8 bg-teal-400"></div>
-              <div className="absolute top-0 left-8 w-8 h-8 bg-black"></div>
-              <div className="absolute top-0 left-16 w-8 h-8 bg-magenta-500"></div>
-              <div className="absolute top-0 left-24 w-8 h-8 bg-teal-400"></div>
-              <div className="absolute top-8 left-0 w-8 h-8 bg-magenta-500"></div>
-              <div className="absolute top-8 left-8 w-8 h-8 bg-teal-400"></div>
-              <div className="absolute top-8 left-16 w-8 h-8 bg-black"></div>
-              <div className="absolute top-8 left-24 w-8 h-8 bg-teal-400"></div>
-            </div>
+    
+          <div className="text-gray-900 p-6 text-2xl font-bold">
+            <Link href={`/`}>
+            Job Markets
+            </Link>
           </div>
-        </div>
+        
+        
+    
       </div>
       
       {/* Right Side - Form */}

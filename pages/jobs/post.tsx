@@ -76,6 +76,9 @@ const PostJob: React.FC = () => {
     try {
       const response = await fetchWithAuth("https://michaelmwanza.site/api/jobs/", {
         method: "POST",
+        headers:{
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(formData),
       });
 
@@ -87,7 +90,18 @@ const PostJob: React.FC = () => {
             return;
         }
 
-        console.log("Job Post submitted successfully:", data.details);
+        setFormData({
+          company_name:'',
+          title: '',
+          description: '',
+          location: '',
+          category:'',
+          experience_level: '',
+          created_by :''
+
+        })
+
+        console.log("Job Post submitted successfully:", );
         alert("Job Post submitted successfully!");
     } catch (error) {
         console.error("Error submitting Job Post:", error);
@@ -229,7 +243,7 @@ const PostJob: React.FC = () => {
               {/* Job Location Field */}
               <div className="mb-6">
                 <label htmlFor="location" className="block text-gray-700 mb-2">
-                  Job location
+                  Job location <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
@@ -238,10 +252,9 @@ const PostJob: React.FC = () => {
                   className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
                   value={formData.location}
                   onChange={handleInputChange}
+                  required
                 />
-                <p className="text-sm text-gray-500 mt-1">
-                  If left blank, location will be set to "Remote"
-                </p>
+              
               </div>
               {/* {Company name} */}
               <div className="mb-6">

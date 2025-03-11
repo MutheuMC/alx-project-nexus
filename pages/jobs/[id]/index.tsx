@@ -1,34 +1,43 @@
-import React, {useEffect , useState} from 'react'
-import { useRouter } from 'next/router'
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import { useJob } from '@/hooks/useJob';
-import { useParams } from 'next/navigation';
 import { JobInfo } from '@/components/JobInfo';
 import Link from 'next/link';
+import JobUpdateForm from '@/components/JobUpdateForm';
+import { useAuth } from '@/context/AuthContext';
 
 const JobDetailsPage: React.FC = () => {
-  const router = useRouter()
-  const [jobId, setJobId] = useState<number | null>(null)
+  const router = useRouter();
+  const [jobId, setJobId] = useState<number | null>(null);
+
+  const [isUpdateFormOpen, setIsUpdateFormOpen] = useState(false);
+  const { user } = useAuth();
 
   // Use effect to safely get the ID after component mounts
   useEffect(() => {
     if (router.isReady) {
-      const id = router.query.id
-      setJobId(Number(id))
+      const id = router.query.id;
+      setJobId(Number(id));
     }
-  }, [router.isReady, router.query])
+  }, [router.isReady, router.query]);
 
   const { job, loading, error } = useJob(jobId as string | number);
 
+  const handleUpdateSuccess = () => {
+    // Refresh job data after update
+    router.reload();
+  };
+
   if (!router.isReady || loading) {
-    return <div className="container mx-auto p-6">Loading...</div>
+    return <div className="container mx-auto p-6">Loading...</div>;
   }
 
   if (error) {
-    return <div className="container mx-auto p-6">Error: {error}</div>
+    return <div className="container mx-auto p-6">Error: {error}</div>;
   }
 
   if (!job) {
-    return <div className="container mx-auto p-6">No job found</div>
+    return <div className="container mx-auto p-6">No job found</div>;
   }
 
   return (
@@ -37,19 +46,29 @@ const JobDetailsPage: React.FC = () => {
       <div className="flex-grow w-full md:w-2/3">
         <div className="mb-4">
           <Link href={`/`}>
-          <p className="text-gray-500 hover:text-black  p-6">← All Jobs</p>
+            <p className="text-gray-500 hover:text-black p-6">← All Jobs</p>
           </Link>
-          
         </div>
-        
+
         <h1 className="text-3xl font-bold mb-4">{job.title}</h1>
-        
+
         <div className="flex items-center space-x-4 mb-6">
           <div className="flex space-x-2">
             <button className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm">Share</button>
             <button className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm">Tweet</button>
-            <button className="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm">Copy</button>
           </div>
+          {user && job.created_by === user.user_id && (
+              <div className="flex space-x-2">
+                <button 
+                  className="bg-green-500 text-white px-3 py-1 rounded-full text-sm"
+                  onClick={() => setIsUpdateFormOpen(true)}
+                >
+                  Update
+                </button>
+
+                <button className="bg-red-600 text-white px-3 py-1 rounded-full text-sm">Delete</button>
+              </div>
+            )}
         </div>
 
         <section className="mb-6">
@@ -64,7 +83,8 @@ const JobDetailsPage: React.FC = () => {
         <section className="mb-6">
           <h2 className="text-xl font-semibold mb-4">The Role:</h2>
           <p className="text-gray-700 mb-4">
-            {job.description || 'We are looking for a highly skilled Freelance Senior Brand Designer to lead impactful brand projects from concept through execution. If you have a strategic mindset, creative vision, and a flair for impactful concept presentations, we\'d love to hear from you.'}
+            {job.description ||
+              "We are looking for a highly skilled Freelance Senior Brand Designer to lead impactful brand projects from concept through execution. If you have a strategic mindset, creative vision, and a flair for impactful concept presentations, we'd love to hear from you."}
           </p>
         </section>
 
@@ -93,7 +113,7 @@ const JobDetailsPage: React.FC = () => {
 
       {/* Sidebar */}
       <div className="w-full md:w-1/3">
-        <JobInfo 
+        <JobInfo
           id={job.id}
           company_name={job.company_name}
           title={job.title}
@@ -119,8 +139,18 @@ const JobDetailsPage: React.FC = () => {
           </div>
         </div>
       </div>
-    </div>
-  )
-}
 
-export default JobDetailsPage
+      {/* Update Form Modal */}
+      {job && (
+        <JobUpdateForm
+          job={job}
+          isOpen={isUpdateFormOpen}
+          onClose={() => setIsUpdateFormOpen(false)}
+          onSuccess={handleUpdateSuccess}
+        />
+      )}
+    </div>
+  );
+};
+
+export default JobDetailsPage;

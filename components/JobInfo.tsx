@@ -1,5 +1,6 @@
 import React from 'react';
 import { Job } from '@/interfaces';
+import Link from 'next/link';
 
 export const JobInfo: React.FC<Job> = ({
   company_name, 
@@ -24,9 +25,11 @@ export const JobInfo: React.FC<Job> = ({
         <a href="#" className="text-blue-600 hover:underline mb-4">
           Visit Website
         </a>
+        <Link href={`/jobs/${id}/apply`}>
         <button className="bg-black text-white py-2 px-4 rounded-lg mb-4">
           Apply for this position
         </button>
+        </Link>
       </div>
       <hr className="my-4" />
       <div className="text-left">
@@ -35,7 +38,7 @@ export const JobInfo: React.FC<Job> = ({
 
         <p className="font-bold mt-4">Location</p>
         <p>{location}</p>
-        <p>Remote Friendly</p>
+       
 
         <p className="font-bold mt-4">Date posted</p>
         <p>{new Date(posted_at).toLocaleDateString('en-US', {

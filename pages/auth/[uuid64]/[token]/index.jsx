@@ -27,7 +27,7 @@ export default function ActivateAccount() {
   const activateAccount = async () => {
     try {
       const response = await fetch(
-        `https://michaelmwanza.site/api/auth/activate/${uuid64}/${token}`
+        `https://michaelmwanza.site/api/activate/${uuid64}/${token}`
       );
 
       const data = await response.json();
