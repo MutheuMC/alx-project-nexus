@@ -5,7 +5,7 @@ import { useRouter, useParams } from "next/navigation";
 import { Eye, EyeOff } from "lucide-react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { config } from "@/config";
+// import { config } from "@/config";
 
 const ResetPassword = () => {
   const [password, setPassword] = useState("");
@@ -52,7 +52,7 @@ const ResetPassword = () => {
     setLoading(true);
 
     try {
-      const res = await fetch(`${config.baseURL}/api/auth/resetPassword/${resetToken}`, {
+      const res = await fetch(`/api/auth/resetPassword/${resetToken}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ password, confirmPassword }),

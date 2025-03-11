@@ -17,7 +17,7 @@ const JobDetailsPage: React.FC = () => {
     }
   }, [router.isReady, router.query])
 
-  const { job, loading, error } = useJob(jobId);
+  const { job, loading, error } = useJob(jobId as string | number);
 
   if (!router.isReady || loading) {
     return <div className="container mx-auto p-6">Loading...</div>
@@ -97,6 +97,7 @@ const JobDetailsPage: React.FC = () => {
           id={job.id}
           company_name={job.company_name}
           title={job.title}
+          description={job.description}
           location={job.location}
           posted_at={job.posted_at}
           experience_level={job.experience_level}

@@ -2,7 +2,12 @@ import React from 'react';
 import JobCard from '@/components/JobCard';
 import { useJobs } from '@/hooks/useJobs';
 
-const JobList: React.FC = () => {
+
+interface JobListProps {
+  filter: Record<string, string | string[]>;
+}
+
+const JobList: React.FC<JobListProps>  = () => {
   const { jobs, loading, error } = useJobs();
 
   if (loading) return <p>Loading jobs...</p>;

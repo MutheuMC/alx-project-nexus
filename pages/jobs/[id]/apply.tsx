@@ -48,14 +48,15 @@ const ApplyJob: React.FC = () => {
 
     // Handle file upload
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files && e.target.files.length > 0) {
+        const file = e.target.files?.[0]; // Optional chaining ensures safety
+        if (file) {
             setFormData(prev => ({
                 ...prev,
-                cv: e.target.files[0]
+                cv: file
             }));
         }
     };
-
+    
     // Text formatting handlers
     const formatText = (format: string) => {
         console.log(`Formatting text as ${format}`);
@@ -74,9 +75,10 @@ const handleSubmit = async (e: React.FormEvent) => {
     formDataToSend.append("user", formData.user);
     formDataToSend.append("jobTitle", formData.jobTitle);
     formDataToSend.append("cover_letter", formData.cover_letter);
+    formDataToSend.append("job_post", String(formData.job_post));
+    formDataToSend.append("job_post_id",String(formData.job_post_id));
     formDataToSend.append("cv_path", formData.cv_path);
-    formDataToSend.append("job_post", formData.job_post);
-    formDataToSend.append("job_post_id", formData.job_post_id);
+ 
 
     if (formData.cv) {
         formDataToSend.append("cv", formData.cv);

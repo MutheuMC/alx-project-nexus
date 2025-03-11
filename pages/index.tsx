@@ -6,12 +6,16 @@ import { Plus } from "lucide-react";
 import JobList from "@/components/JobList";
 import Link from "next/link";
 
-
+interface User {
+  user_id: string; 
+  name?: string;  
+}
 const Index = () => {
-  const [filters, setFilters] = useState<Record<string, string>>({});
+  const [filters, setFilters] = useState<Record<string, string | string[]>>({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [activeTab, setActiveTab] = useState("jobBoard");
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<User | null>(null);
+
 
   const handleClick = ()=>{
     console.log(`clicked`)
@@ -30,7 +34,9 @@ const Index = () => {
     }
   }, []);
 
-  const handleTabChange = (tab) => {
+  type TabType = "jobBoard" | "postedJobs" | "applications"; // Adjust based on your tabs
+
+  const handleTabChange = (tab: TabType) => {
     setActiveTab(tab);
   };
 

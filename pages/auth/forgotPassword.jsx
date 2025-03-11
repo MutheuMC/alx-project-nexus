@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { config } from "@/config";
+// import { config } from "@/config";
 import { toast, ToastContainer  } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -17,7 +17,7 @@ const ForgotPassword = () =>  {
     setLoading(true);
 
     try {
-      const res = await fetch(`${config.baseURL}/api/auth/forgotPassword`, {
+      const res = await fetch(`/api/auth/forgotPassword`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),

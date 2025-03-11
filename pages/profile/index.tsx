@@ -1,40 +1,20 @@
 import React from "react";
 import { MoreHorizontal } from "lucide-react";
 import Button from '@/components/common/Button';
-import { useSearchParams, useRouter } from "next/navigation";
+
 import { useEffect, useState } from "react";
+import { useAuth } from "@/context/AuthContext";
 
 
 
 const ProfileCard = () => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      try {
-        setUser(JSON.parse(storedUser));
-      } catch (error) {
-        console.error("Error parsing user from localStorage", error);
-      }
-    }
-  }, []);
+  const { user } = useAuth() 
+  console.log(user)
 
-  const handleClickJobs = (e: React.MouseEvent) => {
-    e.preventDefault();
-    if (!user || !user.user_id) return;
 
-    const params = new URLSearchParams(searchParams.toString());
-    params.set("created_by", user.user_id);
-    console.log("You have been clicked");
 
-    router.push(`/?${params.toString()}`);
-  };
-      const handleClick = () => {
-        console.log('You have been clicked');
-      };
+
     
   return (
     <div>
@@ -44,7 +24,7 @@ const ProfileCard = () => {
         M
       </div>
       <div>
-      <h2 className="mt-3 text-3xl font-semibold">Musingila Mutheu</h2>
+      <h2 className="mt-3 text-3xl font-semibold">{user?.username}</h2>
       <p className="text-gray-500">Kenya</p>
       </div>
         </div>
@@ -59,8 +39,7 @@ const ProfileCard = () => {
     </div>
        {/* Navigation Buttons */}
        <div className=" ml-12 flex rounded-lg gap-6 py-5">
-        <Button name="Posted Jobs " onClick={handleClickJobs} variant="gray" />
-        <Button name="Applications" onClick={handleClick} variant="gray" />
+      
     
       </div>
 
