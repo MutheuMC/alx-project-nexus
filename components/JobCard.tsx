@@ -58,7 +58,7 @@ const JobCard: React.FC<Job> = ({ company_name,id,  title, location, posted_at, 
         />
         <div className="flex-1">
           <p className="text-base text-gray-500">{company_name}</p>
-          <h3 className="text-lg font-semibold text-black">{title}</h3>
+          <h3 className="text-lg font-semibold text-gray-900 font-sans">{title}</h3>
         </div>
         <div className="space-x-2 flex-column transition-opacity duration-300 group-hover:hidden">
         <div className="text-sm font-light text-gray-400">Posted about {timeAgo(posted_at)}</div>

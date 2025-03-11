@@ -67,7 +67,7 @@ const Search1: React.FC<SearchProps> = ({ placeholder }) => {
   };
 
   return (
-    <div className="flex items-center w-full max-w-[600px] border-2 border-gray-200 hover:border-pink-300 rounded-lg px-4 py-2 gap-2 hover:shadow-lg transition-all focus-within:border-pink-500">
+    <div className="flex items-center w-full  border-2 border-gray-200 hover:border-pink-300 rounded-lg px-4 py-2 gap-2 hover:shadow-lg transition-all focus-within:border-pink-500">
       <select
         value={filterType}
         onChange={handleFilterChange}

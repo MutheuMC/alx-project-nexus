@@ -73,18 +73,22 @@ const Index = () => {
         </div>
 
                 {/* Search Bar - Show on all tabs */}
-      <div className="ml-12 max-w-3xl pb-4">
-        <Search1 placeholder="Search jobs..." />
-      </div>
+                           {/* <div className="ml-12 max-w-3xl pb-4">
+              <Search1 placeholder="Search jobs..." />
+            </div> */}
+   
 
-        <div className="flex flex-col md:flex-row gap-6 px-4 md:px-10">
-          <div className="flex-1">
+          <div className="flex flex-col md:flex-row gap-10 px-4 md:px-10">
+          <div className="flex-1 space-y-10"> 
+            <Search1 placeholder="Search jobs..." /> 
+            <h2 className="text-3xl text-gray-900 font-extrabold ">Recent Posts</h2>
             <JobList filter={filters} />
           </div>
           <div className="hidden md:block w-full md:w-[300px] md:shrink-0">
             <Filter userId={user?.user_id} activeTab={activeTab} onFilterChange={setFilters} />
           </div>
         </div>
+
       </div>
     </div>
   );
