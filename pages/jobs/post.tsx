@@ -13,6 +13,7 @@ type ExperienceOption = {
 };
 
 const PostJob: React.FC = () => {
+  const [isLoading, setIsLoading] = useState(false);
 
 
   // Parse user from localStorage
@@ -69,7 +70,8 @@ const PostJob: React.FC = () => {
   // Form submission handler
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    setIsLoading(true); 
+    // console.log('Form submitted:', formData);
 
 
 
@@ -106,6 +108,8 @@ const PostJob: React.FC = () => {
     } catch (error) {
         console.error("Error submitting Job Post:", error);
         alert("Failed to submit Job Post. Please try again.");
+    }finally{
+      setIsLoading(false);
     }
 };
 
@@ -303,12 +307,14 @@ const PostJob: React.FC = () => {
                 >
                   Cancel
                 </button>
-                <button
-                  type="submit"
-                  className="px-6 py-3 bg-purple-600 text-white rounded-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
+                <button 
+                  type="submit" 
+                  className="w-full bg-purple-600 text-white py-3 rounded-md hover:bg-purple-700 disabled:opacity-50"
+                  disabled={isLoading}
                 >
-                  Post
+                  {isLoading ? "Posting..." : "Post"}
                 </button>
+
               </div>
             </form>
           </div>

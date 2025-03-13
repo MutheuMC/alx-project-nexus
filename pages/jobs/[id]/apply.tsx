@@ -10,7 +10,8 @@ import { useParams } from 'next/navigation';
 const ApplyJob: React.FC = () => {
     const params = useParams();
     const id = params?.id || '';
- 
+
+    const [isLoading, setIsLoading] = useState(false);
 
     // Parse user from localStorage
     let user = null;
@@ -66,7 +67,8 @@ const ApplyJob: React.FC = () => {
     
 const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-        console.log(formData)
+    setIsLoading(true);
+        // console.log(formData)
 
 
 
@@ -107,6 +109,8 @@ const handleSubmit = async (e: React.FormEvent) => {
       } catch (error) {
           console.error("Error submitting Job Application:", error);
           alert("Failed to submit Job Application. Please try again.");
+      }finally{
+        setIsLoading(false);
       }
 };
 
@@ -233,12 +237,14 @@ const handleSubmit = async (e: React.FormEvent) => {
                                 >
                                     Cancel
                                 </button>
-                                <button
-                                    type="submit"
-                                    className="px-6 py-3 bg-purple-600 text-white rounded-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
-                                >
-                                    Submit
-                                </button>
+                                <button 
+                                    type="submit" 
+                                    className="w-full bg-purple-600 text-white py-3 rounded-md hover:bg-purple-700 disabled:opacity-50"
+                                    disabled={isLoading}
+                                    >
+                                    {isLoading ? "Submitting..." : "Submit"}
+                                    </button>
+
                             </div>
                         </form>
                     </div>
