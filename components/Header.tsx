@@ -80,7 +80,7 @@ const Header = () => {
 
               {profileOpen && (
                 <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-lg p-2">
-                  <Link href="/profile" className="block px-4 py-2 text-sm hover:bg-gray-100">
+                  <Link href="/profile" className="block px-4 text-gray-700 py-2 text-sm hover:bg-gray-100">
                     Profile
                   </Link>
                   <button
@@ -94,7 +94,7 @@ const Header = () => {
             </div>
           ) : (
             <div className="flex items-center gap-4">
-              <Link href="/auth/signup" className="text-sm text-black">
+              <Link href="/auth/signup" className="text-sm  text-black">
                 Sign up
               </Link>
               <Link href="/auth/login" className="bg-black text-white px-4 py-2 rounded-full">
