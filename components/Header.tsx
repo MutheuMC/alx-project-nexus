@@ -94,7 +94,7 @@ const Header = () => {
             </div>
           ) : (
             <div className="flex items-center gap-4">
-              <Link href="/auth/signup" className="text-sm">
+              <Link href="/auth/signup" className="text-sm text-black">
                 Sign up
               </Link>
               <Link href="/auth/login" className="bg-black text-white px-4 py-2 rounded-full">
@@ -121,7 +121,7 @@ const Header = () => {
           {user ? (
             <div className="border-b border-gray-200 pb-4 mb-4">
               <div className="flex items-center gap-3 mb-4">
-                <div className="bg-gray-200 p-3 rounded-full">
+                <div className="bg-gray-200 text-white p-3 rounded-full">
                   <User size={24} />
                 </div>
                 <div>
@@ -135,7 +135,7 @@ const Header = () => {
               <Link href="/login" className="bg-black text-white px-4 py-3 rounded-lg text-center font-medium">
                 Log in
               </Link>
-              <Link href="/signup" className="border border-gray-300 px-4 py-3 rounded-lg text-center font-medium">
+              <Link href="/signup" className="gg-black text-white border border-gray-300 px-4 py-3 rounded-lg text-center font-medium">
                 Sign up
               </Link>
             </div>
@@ -143,17 +143,17 @@ const Header = () => {
           
           {/* Navigation Links with Icons */}
           <nav className="space-y-1">
-            <Link href="/" className="flex items-center gap-3 p-3 hover:bg-gray-100 rounded-lg" onClick={() => setOpen(false)}>
+            <Link href="/" className="flex items-center gap-3 p-3 text-gray-700 hover:bg-gray-100 rounded-lg" onClick={() => setOpen(false)}>
               <Home size={20} />
               <span>Home</span>
             </Link>
             
-            <Link href="/jobs" className="flex items-center gap-3 p-3 hover:bg-gray-100 rounded-lg" onClick={() => setOpen(false)}>
+            <Link href="/jobs" className="flex items-center text-gray-700 gap-3 p-3 hover:bg-gray-100 rounded-lg" onClick={() => setOpen(false)}>
               <Briefcase size={20} />
               <span>Browse Jobs</span>
             </Link>
             
-            <Link href="/notifications" className="flex items-center gap-3 p-3 hover:bg-gray-100 rounded-lg" onClick={() => setOpen(false)}>
+            <Link href="/notifications" className="flex items-center text-gray-700 gap-3 p-3 hover:bg-gray-100 rounded-lg" onClick={() => setOpen(false)}>
               <Bell size={20} />
               <span>Notifications</span>
             </Link>
