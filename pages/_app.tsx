@@ -8,7 +8,7 @@ import Footer from "@/components/Footer";
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
-  const noHeaderRoutes = ["/auth/login", "/auth/signup", "/auth/forgotPassword"]; // Routes where header shouldn't appear
+  const noHeaderRoutes = ["/auth/login","/auth/activate", "/auth/signup", "/auth/forgotPassword"]; // Routes where header shouldn't appear
 
   const shouldShowHeader = !noHeaderRoutes.includes(router.pathname);
 

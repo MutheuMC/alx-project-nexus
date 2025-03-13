@@ -33,15 +33,16 @@ export default function Signup() {
 
   const allValid = Object.values(passwordValidations).every(Boolean);
 
-  const handleSignup = async (e) => {
+  const handleSignup = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     setIsSigningUp(true);
     if (!allValid) {
       toast.error("Password does not meet all requirements!");
       return;
     }
-    console.log({ username, email, password });
-    const frontendUrl = "https://alx-project-nexus-pi.vercel.app"
+    // console.log({ username, email, password });
+    // const frontendUrl =" http://localhost:3000/auth"
+    const frontendUrl = "https://alx-project-nexus-pi.vercel.app/auth"
     try {
       const res = await fetch("https://michaelmwanza.site/api/auth/register/", {
         method: "POST",
@@ -54,7 +55,7 @@ export default function Signup() {
       const data = await res.json();
       if (res.ok) {
         toast.success("Signup successful! Please check your email to activate your account.");
-        router.push("/auth/login");
+        router.push("/auth/activate");
       } else {
         Object.keys(data).forEach((key) => {
           if (Array.isArray(data[key])) {

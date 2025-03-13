@@ -26,7 +26,7 @@ export default function Login() {
 
   const { login } = context;
 
-  const handleLogin = async (e) => {
+  const handleLogin = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     setIsLoggingIn(true);
     setError("");
@@ -126,6 +126,11 @@ export default function Login() {
               >
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </button>
+            </div>
+            <div className="mb-4 text-right">
+              <Link href="/auth/forgotPassword" className="text-purple-600 text-sm hover:underline">
+                Forgot Password?
+              </Link>
             </div>
 
             <button

@@ -8,13 +8,13 @@ export default function ActivateAccount() {
   const params = useParams();
   const router = useRouter();
   const [loading, setLoading] = useState(true);
-  const [uuid64, setUuid64] = useState(null);
-  const [token, setToken] = useState(null);
+  const [uuid64, setUuid64] = useState<string | null>(null);
+  const [token, setToken] = useState<string | null>(null);
 
   useEffect(() => {
-    if (params) {
-      setUuid64(params.uuid64);
-      setToken(params.token);
+    if (params?.uuid64 && params?.token) {
+      setUuid64(params.uuid64 as string);
+      setToken(params.token as string);
     }
   }, [params]);
 
@@ -25,6 +25,8 @@ export default function ActivateAccount() {
   }, [uuid64, token]);
 
   const activateAccount = async () => {
+    if (!uuid64 || !token) return;
+
     try {
       const response = await fetch(
         `https://michaelmwanza.site/api/activate/${uuid64}/${token}`
