@@ -56,7 +56,7 @@ const Header = () => {
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
         {/* Left Section: Logo & Search */}
         <div className="flex gap-4 items-center">
-          <Link href="/" className="text-2xl font-bold">
+          <Link href="/" className="text-2xl text-black font-bold">
             Job Markets
           </Link>
 
