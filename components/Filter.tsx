@@ -64,7 +64,7 @@ const Filter: React.FC<FilterProps>= ({ userId, activeTab, onFilterChange }) => 
     <div className="bg-white p-6 rounded-lg border border-gray-200 w-[350px]">
       {/* Categories */}
       <div>
-        <h2 className="text-base mb-3">Categories</h2>
+        <h2 className="text-base text-gray-900 mb-3">Categories</h2>
         <div className="flex flex-col gap-2">
           {categories.map((category) => (
             <label key={category.id} className="flex items-center text-sm text-gray-700 gap-2">
@@ -88,9 +88,9 @@ const Filter: React.FC<FilterProps>= ({ userId, activeTab, onFilterChange }) => 
 
       {/* Location Dropdown */}
       <div className="mt-6">
-        <h2 className="font-semibold text-lg mb-3">Location</h2>
+        <h2 className="font-semibold text-lg text-gray-900 mb-3">Location</h2>
         <select
-          className="w-full p-2 border rounded-lg text-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
+          className="w-full p-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
           value={location}
           onChange={(e) => setLocation(e.target.value)}
         >
@@ -107,16 +107,16 @@ const Filter: React.FC<FilterProps>= ({ userId, activeTab, onFilterChange }) => 
 
       {/* Experience Level */}
       <div className="mt-6">
-        <h2 className="font-semibold text-lg mb-3">Experience Level</h2>
-        <label className="flex items-center gap-2">
+        <h2 className="font-semibold text-lg text-gray-900 mb-3">Experience Level</h2>
+        <label className="flex items-center text-gray-700 gap-2">
           <input type="checkbox" checked={isSenior} onChange={() => setIsSenior(!isSenior)} />
           Senior
         </label>
-        <label className="flex items-center gap-2 mt-2">
+        <label className="flex items-center text-gray-700 gap-2 mt-2">
           <input type="checkbox" checked={isMid} onChange={() => setIsMid(!isMid)} />
           Mid Level
         </label>
-        <label className="flex items-center gap-2 mt-2">
+        <label className="flex items-center text-gray-700 gap-2 mt-2">
           <input type="checkbox" checked={isEntry} onChange={() => setIsEntry(!isEntry)} />
           Entry Level
         </label>
